@@ -19,6 +19,7 @@
   "homepage": "https://github.com/adamtopczewski/ThreeJS#readme",
   "dependencies": {
     "dat.gui": "^0.7.7",
+    "gsap": "^3.9.1",
     "three": "^0.136.0"
   }
 }

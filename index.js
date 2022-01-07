@@ -1,22 +1,21 @@
+import gsap from './node_modules/gsap/index.js';
 import * as THREE from 'https://unpkg.com/three@0.126.0/build/three.module.js';
 import {OrbitControls} from 'https://unpkg.com/three@0.126.0/examples/jsm/controls/OrbitControls.js';
 import * as dat from './node_modules/dat.gui/build/dat.gui.module.js';
 
-// console.log(OrbitControls);
-
 const gui = new dat.GUI();
 const world = {
     plane: {
-        width: 10,
-        height: 10,
-        widthSegments: 10,
-        heightSegments: 10,
+        width: 400,
+        height: 400,
+        widthSegments: 50,
+        heightSegments: 50,
     }
 }
-gui.add(world.plane, 'width', 1, 20).onChange(generatePlane);
-gui.add(world.plane, 'height', 1, 20).onChange(generatePlane);
-gui.add(world.plane, 'widthSegments', 1, 50).onChange(generatePlane);
-gui.add(world.plane, 'heightSegments', 1, 50).onChange(generatePlane);
+gui.add(world.plane, 'width', 1, 500).onChange(generatePlane);
+gui.add(world.plane, 'height', 1, 500).onChange(generatePlane);
+gui.add(world.plane, 'widthSegments', 1, 100).onChange(generatePlane);
+gui.add(world.plane, 'heightSegments', 1, 100).onChange(generatePlane);
 
 function generatePlane() {
     planeMesh.geometry.dispose();
@@ -24,16 +23,40 @@ function generatePlane() {
         world.plane.height,
         world.plane.widthSegments,
         world.plane.heightSegments);
-    const {array} = planeMesh.geometry.attributes.position;
-    for (let i=0; i < array.length; i+= 3) {
-        const x = array[i];
-        const y = array[i + 1];
-        const z = array[i + 2];
 
-        array[i + 2] = z + Math.random();
+
+    // Vertecies pos randomization
+    const {array} = planeMesh.geometry.attributes.position;
+    const randomValues = [];
+    for (let i=0; i < array.length; i++) {
+        // console.log(i)
+        if(i % 3 === 0){
+            const x = array[i];
+            const y = array[i + 1];
+            const z = array[i + 2];
+        
+            array[i] = x + (Math.random() - 0.5) * 3;
+            array[i + 1] = y + (Math.random() - 0.5) * 3;
+            array[i + 2] = z + (Math.random() - 0.5) * 3;
+        }
+        randomValues.push(Math.random() * Math.PI * 2);
     }
+
+    planeMesh.geometry.attributes.position.randomValues = randomValues;
+    planeMesh.geometry.attributes.position.originalPosition = planeMesh.geometry.attributes.position.array;
+
+    const colors = [];
+    for (let i = 0; i < planeMesh.geometry.attributes.position.count; i++) {
+        colors.push(0,0.19,0.4);
+    }
+
+    planeMesh.geometry.setAttribute('color', new THREE.BufferAttribute(
+        new Float32Array(colors), 3)
+    );
+    
 }
 
+const raycaster = new THREE.Raycaster();
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer();
@@ -42,43 +65,100 @@ renderer.setPixelRatio(devicePixelRatio);
 document.body.appendChild(renderer.domElement);
 
 // Geomtery 
-const planeGeomtery = new THREE.PlaneGeometry(10,10,10,10);
-const planeMaterial = new THREE.MeshPhongMaterial({color: 0xff0000, side: THREE.DoubleSide, flatShading: THREE.FlatShading})
+const planeGeomtery = new THREE.PlaneGeometry(world.plane.width, world.plane.height, world.plane.widthSegments, world.plane.heightSegments);
+const planeMaterial = new THREE.MeshPhongMaterial({
+    // color: 0xff0000, 
+    side: THREE.DoubleSide, 
+    flatShading: THREE.FlatShading,
+    vertexColors: true,
+});
 const planeMesh = new THREE.Mesh(planeGeomtery, planeMaterial); // Final obj with geomtery (vertecies in space) and material
 scene.add(planeMesh);
 
-const {array} = planeMesh.geometry.attributes.position;
 
-for (let i=0; i < array.length; i+= 3) {
-    // console.log(i)
-    const x = array[i];
-    const y = array[i + 1];
-    const z = array[i + 2];
-
-    array[i + 2] = z + Math.random();
-}
+generatePlane();
 
 
 const light = new THREE.DirectionalLight(
     0xffffff, 1
 );
 
-light.position.set(0, 0, 1);
+light.position.set(0, 1, 1);
 scene.add(light);
 // Backlight
 const backLight = new THREE.DirectionalLight(
     0xffffff, 1
 );
 
-backLight.position.set(0, 0, -1);
+backLight.position.set(0, -1, -1);
 scene.add(backLight);
 
 new OrbitControls(camera, renderer.domElement);
-camera.position.z = 5;
+camera.position.z = 50;
+
+const mouse = {
+    x: undefined,
+    y: undefined
+}
+
+let frame = 0;
 //Animate
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
+    frame += 0.01;
+    raycaster.setFromCamera(mouse, camera);
+    const intersects =raycaster.intersectObject(planeMesh);
+    const {array, originalPosition, randomValues} = planeMesh.geometry.attributes.position
+    for (let i = 0; i < array.length; i += 3) {
+        array[i] = originalPosition[i] + Math.cos(frame + randomValues[i]) * 0.01;
+        array[i + 1] = originalPosition[i + 1] + Math.sin(frame + randomValues[i + 1]) * 0.01;
+        // array[i + 2] = originalPosition[i] + Math.cos(frame + randomValues[i + 2]) * 0.003;
+    }
+    planeMesh.geometry.attributes.position.needsUpdate = true;
+    // console.log(intersects)
+    if(intersects.length > 0) {
+        const {color} = intersects[0].object.geometry.attributes;
+        intersects[0].object.geometry.attributes.color.needsUpdate = true;
+    
+        const initialColors = {
+            r: 0,
+            g: .19,
+            b: .4,
+        }
+        const hoverColor = {
+            r: .1,
+            g: .5,
+            b: 1,
+        }
+        gsap.to(hoverColor, {
+            r: initialColors.r,
+            g: initialColors.g,
+            b: initialColors.b,
+            onUpdate: () => {
+                // vert 1
+                color.setX(intersects[0].face.a, hoverColor.r);
+                color.setY(intersects[0].face.a, hoverColor.g);
+                color.setZ(intersects[0].face.a, hoverColor.b);
+                // vert 2
+                color.setX(intersects[0].face.b, hoverColor.r);
+                color.setY(intersects[0].face.b, hoverColor.g);
+                color.setZ(intersects[0].face.b, hoverColor.b);
+                // vert 3
+                color.setX(intersects[0].face.c, hoverColor.r);
+                color.setY(intersects[0].face.c, hoverColor.g);
+                color.setZ(intersects[0].face.c, hoverColor.b);
+            }
+        })
+    }
 }
 
 animate();
+
+
+addEventListener('mousemove', (e) => {
+    // mouse normalization (-1,1)
+    mouse.x = (e.clientX / innerWidth) * 2 - 1;
+    mouse.y = -(e.clientY / innerHeight) * 2 + 1;
+    // console.log(mouse)
+});

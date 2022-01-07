@@ -5,14 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-    <!-- <h1>ThreeJS Test</h1> -->
-    <!-- <script type="module">
-        import * as THREE from './node_modules/three/build/three.module.js';
-        window.THREE = THREE;
-    </script> -->
+    <div id="app">
+        <div class="absolute text-white text-center"
+        style="top: 50%; left: 50%; transform: translate(-50%, -50%)">
+            <h1 class="text-5xl mb-3">Hello Threejs</h1>
+            <p class="text-small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet eos consequuntur ad accusamus excepturi incidunt eius suscipit magni blanditiis. Doloribus tempore iure eveniet harum ab sapiente consequatur hic eum neque!</p>
+            <button class="font-bold py-2 px-4 rounded bg-blue-50 text-black mt-5">Next page</button>
+        </div>
+    </div>
     <script src="./index.js" type="module"></script>
 </body>
 </html>
