@@ -1,0 +1,434 @@
+{
+  "accessors": [
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 243,
+      "max": [
+        -6.8012008666992188,
+        25.436086654663086,
+        -6.1343135833740234
+      ],
+      "min": [
+        -8.9961357116699219,
+        25.295650482177734,
+        -9.1016082763671875
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 2916,
+      "componentType": 5126,
+      "count": 243,
+      "max": [
+        0.99991720914840698,
+        1,
+        0.9985772967338562
+      ],
+      "min": [
+        -0.99991703033447266,
+        -1,
+        -0.9985777735710144
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 243,
+      "max": [
+        0.9999658465385437,
+        0.99988859891891479,
+        0.96693152189254761,
+        1
+      ],
+      "min": [
+        -0.9999658465385437,
+        -1,
+        -0.96692943572998047,
+        1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 660,
+      "max": [
+        242
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 5832,
+      "componentType": 5126,
+      "count": 147,
+      "max": [
+        -6.8253717422485352,
+        25.440797805786133,
+        -6.159113883972168
+      ],
+      "min": [
+        -8.9719648361206055,
+        25.290939331054688,
+        -9.0768136978149414
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 7596,
+      "componentType": 5126,
+      "count": 147,
+      "max": [
+        0.9999617338180542,
+        1,
+        0.99832999706268311
+      ],
+      "min": [
+        -0.999961256980896,
+        -1,
+        -0.99832940101623535
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 3888,
+      "componentType": 5126,
+      "count": 147,
+      "max": [
+        0.99999922513961792,
+        1,
+        0.96592581272125244,
+        1
+      ],
+      "min": [
+        -0.99967539310455322,
+        -1,
+        -0.9930986762046814,
+        -1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 2640,
+      "componentType": 5125,
+      "count": 348,
+      "max": [
+        146
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 9360,
+      "componentType": 5126,
+      "count": 145,
+      "max": [
+        -8.1690864562988281,
+        25.442226409912109,
+        -6.497222900390625
+      ],
+      "min": [
+        -8.4103593826293945,
+        25.442226409912109,
+        -6.6137309074401855
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 11100,
+      "componentType": 5126,
+      "count": 145,
+      "max": [
+        0,
+        1,
+        0.0078221065923571587
+      ],
+      "min": [
+        0,
+        0.99996626377105713,
+        -0.0082221273332834244
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 6240,
+      "componentType": 5126,
+      "count": 145,
+      "max": [
+        -0.93522083759307861,
+        0.0027556812856346369,
+        -0.34829753637313843,
+        1
+      ],
+      "min": [
+        -0.93738281726837158,
+        -0.0028968797996640205,
+        -0.35406115651130676,
+        1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 4032,
+      "componentType": 5125,
+      "count": 417,
+      "max": [
+        144
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "French Baguette (https://sketchfab.com/FrenchBaguette)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/models/5134059a9eb844c1b106e4cb7eafd88c",
+      "title": "Smart Phone (School Project)"
+    },
+    "generator": "Sketchfab-3.23.4",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 5700,
+      "byteOffset": 0,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 12840,
+      "byteOffset": 5700,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 8560,
+      "byteOffset": 18540,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 27100,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "MetalRim",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.71428599999999998,
+          0.71428599999999998,
+          0.71428599999999998,
+          1
+        ],
+        "metallicFactor": 1,
+        "roughnessFactor": 0.52000762199999995
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "PhoneGlass",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.0064935100000000001,
+          0.0064935100000000001,
+          0.0064935100000000001,
+          1
+        ],
+        "metallicFactor": 1,
+        "roughnessFactor": 0
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "typeBlinn1",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.92074838159999994
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Phone_MetalRim_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Phone_PhoneGlass_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 5,
+            "POSITION": 4,
+            "TANGENT": 6
+          },
+          "indices": 7,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Phone_typeBlinn1_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 9,
+            "POSITION": 8,
+            "TANGENT": 10
+          },
+          "indices": 11,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [
+        -0.70710678118654746,
+        -0,
+        -0,
+        0.70710678118654757
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        0.9367833137512207,
+        0,
+        -0.34991008043289185,
+        0,
+        -0.3305702805519104,
+        0.3278515636920929,
+        -0.88500654697418213,
+        0,
+        0.11471857130527496,
+        0.9447292685508728,
+        0.30712586641311646,
+        0,
+        -0.89103692770004272,
+        -18.843540191650391,
+        21.553318023681641,
+        1
+      ],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [
+        3
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "f2063c893b794b2bad544faa29dc8104.fbx"
+    },
+    {
+      "children": [
+        4
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        5,
+        6,
+        7
+      ],
+      "name": "Phone"
+    },
+    {
+      "mesh": 0,
+      "name": "Phone_MetalRim_0"
+    },
+    {
+      "mesh": 1,
+      "name": "Phone_PhoneGlass_0"
+    },
+    {
+      "mesh": 2,
+      "name": "Phone_typeBlinn1_0"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
+
