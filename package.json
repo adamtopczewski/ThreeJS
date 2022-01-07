@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "live-server"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/adamtopczewski/ThreeJS#readme",
   "dependencies": {
+    "dat.gui": "^0.7.7",
     "three": "^0.136.0"
   }
 }
