@@ -23,6 +23,7 @@ document.addEventListener( 'mousemove', onDocumentMouseMove );
 //Renderer/Scene Serttings
 renderer.setClearColor(0xffffff, 1);
 renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setPixelRatio( window.devicePixelRatio );
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap ; // default THREE.PCFShadowMap
 let fogColor = new THREE.Color(0xF8F8F8);
@@ -219,3 +220,15 @@ function onDocumentMouseMove( event ) {
     // mouseY = ( event.clientY - windowHalfY ) / 1000;
 
 }
+
+function onWindowResize() {
+
+    windowHalfX = window.innerWidth / 2;
+    // windowHalfY = window.innerHeight / 2;
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+}
+
+window.addEventListener( 'resize', onWindowResize );
