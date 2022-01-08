@@ -1,8 +1,11 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: pink;
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 #app {
     pointer-events: none;
+    font-family: 'Space Grotesk', sans-serif;
 }
