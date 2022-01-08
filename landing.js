@@ -170,14 +170,14 @@ scene.add(light);
 
 
 //Camera & Orbit
-const orbit = new OrbitControls(camera, renderer.domElement);
+// const orbit = new OrbitControls(camera, renderer.domElement);
 camera.position.z = 3;
 camera.position.y = 1.5;
 camera.position.x = 0;
 
 
 camera.lookAt(-0.5, 1, -3);
-orbit.target.set(-0.5, 1, -3);
+// orbit.target.set(-0.5, 1, -3);
 
 
 // Light helpers
