@@ -28,7 +28,7 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap ; // default THREE.PCFShadowMap
 let fogColor = new THREE.Color(0xF8F8F8);
 scene.background = 0xF8F8F8;
-scene.fog = new THREE.Fog( 0xffffff, 10, 50 )
+scene.fog = new THREE.Fog( 0xffffff, 0.25, 50 )
 
 
 
@@ -53,11 +53,13 @@ scene.add( plane );
 
 // cubeMesh.position.y = 1.5;
 // scene.add(cubeMesh);
-
-
+let desktopModel = null;
+let phoneModel = null;
+let laptopModel = null;
+function loadObjects(){
 // ADD obj to scene 
 const loader = new GLTFLoader().setPath('./assets/models/monitor/');
-let desktopModel = null;
+
 loader.load( 'scene.glb', function ( gltf ) {
 	scene.add( gltf.scene );
     if(!desktopModel) {
@@ -80,26 +82,28 @@ loader.load( 'scene.glb', function ( gltf ) {
 
 } );
 loader.setPath('./assets/models/smartphone2/');
-let phoneModel = null;
-loader.load( 'scene.glb', function ( gltf ) {
+
+loader.load( 'fixed_origin.glb', function ( gltf ) {
     
 	// scene.add( gltf.scenes[0] );
     scene.add( gltf.scene);
     if(!phoneModel) {
         phoneModel = gltf.scene;
-        phoneModel.position.x = 0.2;
+        phoneModel.position.x = 0;
         phoneModel.position.y = 1.5;
-        phoneModel.position.z = -1;
-        phoneModel.rotation.y = 0;
+        phoneModel.position.z = -1.6;
+        phoneModel.rotation.y = 0.123;
         // phoneModel.rotation.z = 3.03;
         phoneModel.scale.x = 0.015;
         phoneModel.scale.y = 0.015;
         phoneModel.scale.z = 0.015;
-        phoneModel.castShadow = true;
-        phoneModel.receiveShadow  = true;
-        phoneModel.children[0].children[0].children[0].traverse( function( node ) { if ( node instanceof THREE.Mesh ) { node.castShadow = true; } } );
-        console.log(phoneModel)
-    }
+        // phoneModel.castShadow = true;
+        // phoneModel.receiveShadow  = true;
+        phoneModel.traverse( function( node ) { if ( node instanceof THREE.Mesh ) { node.castShadow = true; } } );
+        // console.log(phoneModel)
+        // var bbox = new THREE.BoxHelper(phoneModel, 0xff0000);
+        // scene.add(bbox)
+        }
 
 
 }, undefined, function ( error ) {
@@ -109,7 +113,7 @@ loader.load( 'scene.glb', function ( gltf ) {
 } );
 
 loader.setPath('./assets/models/laptop/');
-let laptopModel = null;
+
 loader.load( 'scene.glb', function ( gltf ) {
     
 	// scene.add( gltf.scenes[0] );
@@ -135,6 +139,7 @@ loader.load( 'scene.glb', function ( gltf ) {
 	console.error( error );
 
 } );
+}
 
 
 
@@ -171,13 +176,16 @@ scene.add(light);
 
 
 //Camera & Orbit
-// const orbit = new OrbitControls(camera, renderer.domElement);
-camera.position.z = 3;
+const orbit = new OrbitControls(camera, renderer.domElement);
+orbit.enabled = false;
+orbit.enableDamping = true;
+
+
+camera.position.z = 15;
 camera.position.y = 1.5;
 camera.position.x = 0;
 
-
-camera.lookAt(-0.5, 1, -3);
+camera.lookAt(-0.5, 1.5, -3);
 // orbit.target.set(-0.5, 1, -3);
 
 
@@ -194,12 +202,28 @@ let frame = 0;
 function animate() {
     frame += 0.001
     requestAnimationFrame( animate );
-    camera.position.x += ( mouseX - camera.position.x ) * .035;
+    // camera.position.x += ( mouseX - camera.position.x ) * .035;
     // camera.position.z += ( - mouseY - camera.position.y ) * .005;
-    camera.lookAt(-0.5, 1, -3);
+    orbit.object.position.x += ( mouseX - camera.position.x ) * .35;
+    orbit.update();
+    // orbit.position.z += ( - mouseY - camera.position.y ) * .005;
+    // gsap.to(camera.position, {
+    //     x: 3,
+    //     easing: 'ease-in-out',
+    //     duration: 1,
+    //     onUpdate: function() {
+
+    //         camera.lookAt(-0.5, 1.5, -3);
+    
+    //     }
+    // })
+
+
+
+    camera.lookAt(-0.5, 1.5, -3);
     if(phoneModel){
         phoneModel.rotation.y += Math.cos(frame)/ 1000;
-        phoneModel.rotation.z += Math.sin(frame)/ 100000;
+        phoneModel.rotation.z += Math.sin(frame)/ 1000;
     }
     if (laptopModel) {
         laptopModel.rotation.z += Math.sin(frame)/ 5000;
@@ -209,9 +233,19 @@ function animate() {
     renderer.render( scene, camera );
 };
 
-animate()
-
 // FUNCTIONS
+
+const animateCamera = () => {
+    const tl = gsap.timeline({ repeat: 0, defaults: { ease: "easeIn" } });
+    gsap.to(camera.position, {
+      z: "3",
+      duration: 2,
+      onComplete: () => {
+        gsap.set(camera.position, { z: "3" });
+      }
+    });
+    // return tl.timeScale(0.575);
+  };
 
 
 function onDocumentMouseMove( event ) {
@@ -232,3 +266,8 @@ function onWindowResize() {
 }
 
 window.addEventListener( 'resize', onWindowResize );
+window.addEventListener( 'load', function(){
+    loadObjects(); // Optimize loading, make rest of functions await this one
+    animate();
+    animateCamera();
+})
