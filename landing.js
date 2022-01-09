@@ -4,9 +4,11 @@ import {OrbitControls} from 'https://unpkg.com/three@0.126.0/examples/jsm/contro
 import * as dat from './node_modules/dat.gui/build/dat.gui.module.js';
 import { GLTFLoader } from  'https://unpkg.com/three@0.126.0/examples/jsm/loaders/GLTFLoader.js';
 
+
 //VARS
 let scene , camera, renderer, orbit;
 let desktopModel, phoneModel, laptopModel;
+let plane;
 let mouseX = 0;
 // let mouseY = 0;
 
@@ -35,7 +37,7 @@ function init() {
 
 function configureObjects() {
     // Floor
-    const plane = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: true } ) );
+    plane = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: true , flatShading: true } ) );
     plane.rotation.x = - Math.PI / 2;
     plane.receiveShadow = true;
     scene.add( plane );
@@ -92,7 +94,7 @@ function configureObjects() {
     orbit.enableDamping = true;
 
 
-    camera.position.z = 15;
+    camera.position.z = 60;
     camera.position.y = 1.5;
     camera.position.x = 0;
 
@@ -199,34 +201,35 @@ const animateElements = () => {
     //continue the process
     let canvas = document.querySelector('canvas');
     gsap.timeline({ 
-        defaults: { duration: 1.5 }
+        // defaults: { duration: 0.9 }
     })
     .to(canvas, {
     opacity: 1,
-    duration: 1,
-    ease: "easeOut"
+    duration: 0.5,
+    ease: "power2.inOut"
     })
     .to('#app', {
         opacity: 1,
-        duration: 0.5,
-        ease: "easeOut"
-    })
+        duration: 0.3,
+        ease: "power2.inOut"
+    }, 0.9)
     .to('#wrapper', {
         top: '0%',
-        duration: 0.5,
-        ease: "easeOut"
-    }, 1);
+        duration: 0.4,
+        ease: "power2.inOut"
+    }, 0.9);
 }
 
 const animateCamera = () => {
     const tl = gsap.timeline({ repeat: 0, defaults: { ease: "easeIn" } });
     gsap.to(camera.position, {
       z: "3",
-      duration: 2,
+      duration: 0.8,
+      ease: 'power2.out',
       onComplete: () => {
         gsap.set(camera.position, { z: "3" });
       }
-    });
+    }).delay(0.2);
     // return tl.timeScale(0.575);
 };
 
@@ -249,4 +252,46 @@ window.addEventListener( 'resize', onWindowResize );
 window.addEventListener( 'load', function(){
     init();
     loadObjects();
+    let theme = 'light';
+    const btn = document.querySelector('#dark-mode');
+    btn.addEventListener('click', () =>{
+
+
+        if(theme === 'light') {
+            gsap.to('body', {color: 'white', duration: 0.2, ease: 'power2.inOut'});
+            gsap.to('.text-transformJS', {color: 'white', duration: 0.2, ease: 'power2.inOut'});
+            gsap.to('.btn-toChangeBgJS', {background: 'white', color: 'black', duration: 0.2, ease: 'power2.inOut'});
+            gsap.to('.btn-toChangeBgJS span', { color: 'black', duration: 0.2, ease: 'power2.inOut'});
+
+            scene.background = new THREE.Color(0x121212);
+            scene.fog = new THREE.Fog( 0x121212, 0.25, 50 );
+            plane.material.color = new THREE.Color(0x121212);
+
+            // gsap.to(scene, {
+            //     background: new THREE.Color(0x121212),
+            //     fog: new THREE.Fog( 0x121212, 0.25, 50 ),
+            //     duration: 0.3,
+            //     ease: 'power2.out',
+            // });
+            // gsap.to(plane.material, {
+            //     color: new THREE.Color(0x121212),
+            //     duration: 0.3,
+            //     ease: 'power2.out',
+            // });
+            theme = 'dark';
+        } else {
+
+            gsap.to('body', {color: 'black', duration: 0.2, ease: 'power2.inOut'});
+            gsap.to('.text-transformJS', {color: 'black', duration: 0.2, ease: 'power2.inOut'});
+            gsap.to('.btn-toChangeBgJS', {background: 'rgb(33, 33, 33)', color: 'white', duration: 0.2, ease: 'power2.inOut'});
+            gsap.to('.btn-toChangeBgJS span', {color: 'white', duration: 0.2, ease: 'power2.inOut'});
+
+            scene.background = new THREE.Color(0xF8F8F8);
+            scene.fog = new THREE.Fog( 0xF8F8F8, 0.25, 50 )
+            plane.material.color = new THREE.Color(0x999999);
+
+            theme = 'light';
+        }
+
+    }) 
 })

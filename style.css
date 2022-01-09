@@ -6,9 +6,11 @@ body {
 }
 
 #app {
-    pointer-events: none;
+
     font-family: 'Space Grotesk', sans-serif;
     opacity: 0;
+    position: relative;
+    z-index: 1;
 }
 
 #wrapper {
@@ -18,3 +20,7 @@ body {
 canvas {
     opacity: 0;
 }
+
+/* #nav {
+
+} */

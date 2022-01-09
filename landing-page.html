@@ -14,27 +14,52 @@
 </head>
 <body>
     <div id="app">
+        <!-- Todo nav -->
+        <nav id="nav" class="absolute w-screen" style="height: 104px;">
+            <div class="flex row justify-between align-center" style="margin:0 98px; padding: 0 40px; height: 100%; align-items: center;">
+                <div>
+                    <a class="text-transformJS"  href="https://bandit.house" style=" font-size: 32px;color: rgb(33, 33, 33); font-weight: 600;"><span style="color:#e31e24;">BAND</span>IT_HOUSE</a>
+                </div>
+                <div>
+                    <ul class="flex row">
+                        <li class="p-5"><a class="text-transformJS" style="color: rgb(33, 33, 33); font-size: 24px;" href="#about">About</a></li>
+                        <li class="p-5"><a class="text-transformJS" style="color: rgb(33, 33, 33); font-size: 24px;" href="#stack">Stack</a></li>
+                        <li class="p-5"><a class="text-transformJS" style="color: rgb(33, 33, 33); font-size: 24px;" href="#values">Our ways</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div>
+                        <a>
+                            <span class="text-transformJS" style="color: rgb(33, 33, 33); font-size: 24px;">Talk to a BandIT</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
         <div id="wrapper" class="absolute flex justify-center items-center h-screen w-screen">
-            <!-- Todo nav -->
-
             <!-- Todo Landing text -->
-            <div class="h-48 flex justify-between gap-10 items-center w-1/2">
+            <div class="h-48 flex justify-between gap-10 items-center w-full" style="max-width: 1200px;">
                 <div class="flex flex-col flex-1 items-start font-bold">
-                    <div class="text-left text-3xl">
+                    <div class="text-left" style="font-size: 20px;line-height: 1; margin-bottom: 32px;">
                         <h2>SOFTWARE DEVELOPMENT</h2>
                     </div>
-                    <div class="text-left text-6xl">
+                    <div class="text-left" style="font-size: 96px;line-height: 1;">
                         <h1>with <span class="text-red-500">VALUES</span></br>in mind</h1>
                     </div>
-                    <a href="#" class="uk-button uk-button-large uk-button-primary uk-margin-medium-top uk-margin-large-top@m dark:uk-background-white dark:uk-text-gray-100 dark:hover:uk-background-gray-20 dark:hover:uk-text-gray-80">
-                        <span>Start a project</span>
+                    <a href="#" id="btn-toggle-dark" style="min-height: 56px;min-width: 213px; background: rgb(33, 33, 33); display: flex;" 
+                    class="btn-toChangeBgJS uk-button uk-button-large uk-button-primary uk-margin-medium-top uk-margin-large-top@m dark:uk-background-white dark:uk-text-gray-100 dark:hover:uk-background-gray-20 dark:hover:uk-text-gray-80">
+                        <span style="font-size: 20px; text-transform: none;">Start a project</span>
                     </a>
                 </div>
                 <div class="flex flex-1 items-center">
                     <p></p>
                 </div>
             </div>
-
+            <div class="absolute" style="bottom: 5%; right: 5%; min-height: 56px;">
+                <a href="#" style="min-width: 213px; background: rgb(33, 33, 33); display: flex;" id="dark-mode" class="btn-toChangeBgJS uk-button uk-button-large uk-button-primary uk-margin-medium-top uk-margin-large-top@m dark:uk-background-white dark:uk-text-gray-100 dark:hover:uk-background-gray-20 dark:hover:uk-text-gray-80">
+                    <span>Dark mode</span>
+                </a>
+            </div>
         </div>
     </div>
     <script src="./landing.js" type="module"></script>
