@@ -173,6 +173,7 @@ function animate() {
     // camera.position.x += ( mouseX - camera.position.x ) * .035;
     // camera.position.z += ( - mouseY - camera.position.y ) * .005;
     orbit.object.position.x += ( mouseX - camera.position.x ) * .35;
+    orbit.object.position.z += ( mouseX - camera.position.x ) * .035;
     orbit.update();
     // orbit.position.z += ( - mouseY - camera.position.y ) * .005;
     camera.lookAt(-0.5, 1.5, -3);
@@ -235,7 +236,7 @@ const animateCamera = () => {
 
 
 function onDocumentMouseMove( event ) {
-    mouseX = ( event.clientX - windowHalfX ) / 1000;
+    mouseX = ( event.clientX - windowHalfX ) / 3000;
     // mouseY = ( event.clientY - windowHalfY ) / 1000;
 }
 
@@ -247,6 +248,27 @@ function onWindowResize() {
     camera.updateProjectionMatrix();
 }
 
+function playVideoTexture(e) {
+    console.log(e)
+    if(e.key === 'h'){
+        console.log(desktopModel)
+        console.log(desktopModel.getObjectByName('Object_8'));
+        const oldMat = desktopModel.getObjectByName('Object_4').material;
+        const video = document.getElementById( 'video' );
+        const videoTexture = new THREE.VideoTexture(video);
+        const videoMaterial =  new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
+        desktopModel.getObjectByName('Object_4').material = videoMaterial;
+        desktopModel.getObjectByName('Object_4').material.needsUpdate = true;
+        video.onended = () => {
+            desktopModel.getObjectByName('Object_4').material = oldMat;
+            desktopModel.getObjectByName('Object_4').material.needsUpdate = true;
+        }
+        video.play();
+        // desktopModel.getObjectByName('Object_5').material.texture = texture;
+    }
+}
+
+window.addEventListener( 'keydown', playVideoTexture );
 document.addEventListener( 'mousemove', onDocumentMouseMove );
 window.addEventListener( 'resize', onWindowResize );
 window.addEventListener( 'load', function(){
@@ -264,8 +286,8 @@ window.addEventListener( 'load', function(){
             gsap.to('.btn-toChangeBgJS span', { color: 'black', duration: 0.2, ease: 'power2.inOut'});
 
             scene.background = new THREE.Color(0x121212);
-            scene.fog = new THREE.Fog( 0x121212, 0.25, 50 );
-            plane.material.color = new THREE.Color(0x121212);
+            scene.fog = new THREE.Fog( 0x121212, 0.25, 25 );
+            plane.material.color = new THREE.Color(0x0D0D0D);
 
             // gsap.to(scene, {
             //     background: new THREE.Color(0x121212),
