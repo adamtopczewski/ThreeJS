@@ -8,4 +8,13 @@ body {
 #app {
     pointer-events: none;
     font-family: 'Space Grotesk', sans-serif;
+    opacity: 0;
+}
+
+#wrapper {
+    top: -10%;
+}
+
+canvas {
+    opacity: 0;
 }
